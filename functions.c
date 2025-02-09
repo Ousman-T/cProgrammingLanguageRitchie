@@ -1,18 +1,20 @@
 #include <stdio.h>
-int power(x,n) 
-int x, n;
+int power(int x, int n)
 {
-     int i, p;
-    p = 1;
-    for (i = 1; i <= n; i++) {
+    int i, p = 1;
+    for (i = 1; i <= n; i++)
+    {
         p = p * x;
-        return(p);
     }
+    return p;
 }
 
-int main() {
+int main()
+{
     int i;
-    for (i = 0; i < 10; i++) {
-        printf("%d %d %d\n", i, power(2,8), power(-3,3));
+    for (i = 0; i < 10; i++)
+    {
+        printf("%d %d %d\n", i, power(2, i), power(-3, i));
     }
+    return 0;
 }
