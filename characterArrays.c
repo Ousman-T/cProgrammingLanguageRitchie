@@ -1,42 +1,61 @@
 #include <stdio.h>
-#define MAXLINE 1000 
+#define MAXLINE 1000
+
+int getLine(char s[], int lim);
+void copy(char to[], char from[]);
 
 int main() {
-    /*find longest line*/
-    int len; 
-    int max; 
-    char line[MAXLINE];
-    char save[MAXLINE];
-    max = 0;
+    int len;                // Current line length
+    int max = 0;            // Maximum length found so far
+    char line[MAXLINE];     // Current input line buffer
+    char longest[MAXLINE];  // Longest line saved (up to MAXLINE)
+
     while ((len = getLine(line, MAXLINE)) > 0) {
         if (len > max) {
             max = len;
-            copy(line, save);
+            copy(longest, line);
         }
     }
+
     if (max > 0) {
-        printf("%s", save, '\n');
+        printf("\n Longest line length: %d\n", max);
+        printf("\n Content (truncated if too long): %s", longest);
     }
     return 0;
 }
 
+// Reads a line into s[], returns the length
 int getLine(char s[], int lim) {
-    int c, i;
-    for (i = 0; i < lim - 1 && (c=getchar()) != EOF && c != '\n'; i++) {
-        s[i] = c;
+    int c, i = 0, length = 0;
+
+    // Read up to the buffer limit
+    while (i < lim - 1 && (c = getchar()) != EOF && c != '\n') {
+        s[i++] = c;
+        length++;
     }
+
+    // If line exceeds buffer, keep counting characters
+    while (c != EOF && c != '\n') {
+        c = getchar();
+        length++;
+    }
+
+    // Add newline if it was part of the input
     if (c == '\n') {
-        s[i] = c;
-        i++;
+        if (i < lim - 1) {
+            s[i++] = c;
+        }
+        length++;
     }
-    s[i] = '\0';
-    return(i);
+
+    s[i] = '\0'; // Null-terminate the string
+    return length;
 }
 
-void copy(char s1[], char s2[]) {
-    int i;
-    i = 0;
-    while ((s2[i] = s1[i]) != '\0') {
+// Copies 'from' to 'to'
+void copy(char to[], char from[]) {
+    int i = 0;
+    while ((to[i] = from[i]) != '\0') {
         i++;
     }
 }
