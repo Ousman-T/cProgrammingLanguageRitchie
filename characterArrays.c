@@ -5,6 +5,11 @@ int getLine(char s[], int lim);
 void copy(char to[], char from[]);
 
 int main() {
+    char str[] = "Hello World!";
+    printf("Original string: %s\n", str);
+
+    reverse(str);
+    printf("Reversed: %s\n", str);
     int len;                // Current line length
     int max = 0;            // Maximum length found so far
     char line[MAXLINE];     // Current input line buffer
@@ -57,5 +62,24 @@ void copy(char to[], char from[]) {
     int i = 0;
     while ((to[i] = from[i]) != '\0') {
         i++;
+    }
+}
+
+// verse string in place
+void reverse(char s[]) {
+    int i, j;
+    char temp;
+    
+    i = 0; // first index
+    j = strlen(s) - 1; //index of last char
+
+    while (i < j) {
+        // swap chars at positions i and j and increment 
+        temp = s[i];
+        s[i] = s[j];
+        s[j] = temp;
+
+        i++;
+        j--;
     }
 }
