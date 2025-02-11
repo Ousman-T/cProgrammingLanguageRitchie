@@ -11,11 +11,11 @@ int main() {
     while ((len = getLine(line, MAXLINE)) > 0) {
         if (len > max) {
             max = len;
-            copy(save, line);
+            copy(line, save);
         }
     }
     if (max > 0) {
-        printf("%s", save);
+        printf("%s", save, '\n');
     }
     return 0;
 }
@@ -33,7 +33,7 @@ int getLine(char s[], int lim) {
     return(i);
 }
 
-int copy(char s1[], char s2[]) {
+void copy(char s1[], char s2[]) {
     int i;
     i = 0;
     while ((s2[i] = s1[i]) != '\0') {
